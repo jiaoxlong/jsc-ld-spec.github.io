@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>How to install JSC-LD &#8212; JSON Schema LD Specification 2020-08 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jsonschema.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="_static/logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="JSC-LD configuration" href="jsc_ld_configuration.html" />
+    <link rel="prev" title="JSON Schema LD specification" href="index.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-99695987-1');
+</script>
+
+  </head><body>
+  
+  <a href="https://github.com/jiaoxlong/jsc-ld"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          JSON Schema LD Specification</a>
+        <span class="navbar-text navbar-version pull-left"><b>2022-08</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">JSON Schema LD specification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to install JSC-LD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsc_ld_configuration.html">JSC-LD configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsc_ld_syntax.html">JSC-LD Annotation Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported_jsc_kws.html">Supported JSON Schema keywords</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: JSON Schema LD specification"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; JSON Schema L...</span>
+    </a>
+  </li>
+  <li>
+    <a href="jsc_ld_configuration.html" title="Next Chapter: JSC-LD configuration"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">JSC-LD configuration &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="how-to-install-jsc-ld">
+<span id="jsc-ld-installation"></span><h1>How to install JSC-LD<a class="headerlink" href="#how-to-install-jsc-ld" title="Permalink to this headline">¶</a></h1>
+<p>This jsc-ld package can be either installed from npm or setup from cloning the repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/jiaoxlong/jsc-ld
+npm i jsc-ld
+</pre></div>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>JSC-LD
+
+JSON Schema LD is a syntactic sugar for JSON Schema to enable generative
+interoperability by means of representing JSON schema in RDF vocabularies
+(RDF Scheme) and RDF shapes in SHACL.
+
+Synopsis
+  $ jsc-ld --source json_schema.js --out out --config config.json
+  $ jsc-ld --source json_schema.js --config config.json
+  $ jsc-ld -s json_schema.js -c config.js
+
+Options
+
+  -c, --config config_file                     JSC-LD configuration file
+  -s, --source path/to/source/file|directory   Path to a JSON schema file or a directory contains JSON schema files
+  -o, --out path/to/directory                  Path to output directory defaults to &quot;out&quot;
+  -h, --help                                   Display this usage guide
+</pre></div>
+</div>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, IDLab, Ghent University – imec.<br/>
+      Last updated on Oct 06, 2022.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

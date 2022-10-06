@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>JSC-LD Annotation Syntax &#8212; JSON Schema LD Specification 2020-08 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jsonschema.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="_static/logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Supported JSON Schema keywords" href="supported_jsc_kws.html" />
+    <link rel="prev" title="JSC-LD configuration" href="jsc_ld_configuration.html" />
+
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-99695987-1');
+</script>
+
+  </head><body>
+  
+  <a href="https://github.com/jiaoxlong/jsc-ld"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          JSON Schema LD Specification</a>
+        <span class="navbar-text navbar-version pull-left"><b>2022-08</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Table of contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">JSON Schema LD specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsc_ld_installation.html">How to install JSC-LD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jsc_ld_configuration.html">JSC-LD configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">JSC-LD Annotation Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported_jsc_kws.html">Supported JSON Schema keywords</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="jsc_ld_configuration.html" title="Previous Chapter: JSC-LD configuration"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; JSC-LD configuration</span>
+    </a>
+  </li>
+  <li>
+    <a href="supported_jsc_kws.html" title="Next Chapter: Supported JSON Schema keywords"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Supported JSO... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="jsc-ld-annotation-syntax">
+<span id="jsc-ld-syntax"></span><h1>JSC-LD Annotation Syntax<a class="headerlink" href="#jsc-ld-annotation-syntax" title="Permalink to this headline">¶</a></h1>
+<p>A JSON Schema can be structured in relatively complex forms including nested objects, arrays or combinations e.g.
+a geojson feature. In addition to that, nested objects/arrays natively imply properties in JSON Schema are linked directly
+without associations. In order to solve the complexity, we introduce JSON Schema LD Annotation Syntax ease the translation of JSON Schem into RDF.</p>
+<section id="ld-id">
+<h2>ld.id<a class="headerlink" href="#ld-id" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.id</span></code> keyword is primarily used in combination with <code class="docutils literal notranslate"><span class="pre">ld.existing</span></code>, <code class="docutils literal notranslate"><span class="pre">ld.class</span></code> or <code class="docutils literal notranslate"><span class="pre">ld.association</span></code>. When a property is annotated with <code class="docutils literal notranslate"><span class="pre">ld.id</span></code> alone,
+the property will be renamed to the value assigned to <code class="docutils literal notranslate"><span class="pre">ld.id</span></code>.</p>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For the sake of interoperability between JSON Schema and RDF, One may not want to use <code class="docutils literal notranslate"><span class="pre">ld.id</span></code> to rename a property name in RDF.</p>
+</div>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/identifier&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:identifier rdf:type rdf:Property;
+    rdfs:label &quot;identifier&quot;;
+    rdfs:range xsd:string.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:identifier;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this example, the hypothetical <code class="docutils literal notranslate"><span class="pre">id</span></code> property is mapped to <code class="docutils literal notranslate"><span class="pre">identifier</span></code> in a URI, of which name prefix is predefined in a ref:<a class="reference internal" href="jsc_ld_configuration.html#jsc-ld-configuration"><span class="std std-ref">JSC-LD configuration</span></a> file with <code class="docutils literal notranslate"><span class="pre">base_url</span></code>.
+Instead of giving a full path, one may also use <code class="docutils literal notranslate"><span class="pre">&quot;ld.id&quot;:</span> <span class="pre">&quot;identifier&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;ld.id&quot;:</span> <span class="pre">${base_prefix}:identifier&quot;</span></code> as a shortcut.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ld.id</span></code> can be used in combination with <code class="docutils literal notranslate"><span class="pre">ld.existing</span></code> when a property already exists in a vocabulary,
+with <code class="docutils literal notranslate"><span class="pre">ld.class</span></code> when a property needs to be casted into a Class in RDF, or with <code class="docutils literal notranslate"><span class="pre">ld.association</span></code> when an association class needs to be introduced.</p>
+</div>
+</section>
+<section id="ld-title-ld-description-and-ld-comment">
+<h2>ld.title ld.description and ld.comment<a class="headerlink" href="#ld-title-ld-description-and-ld-comment" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.title</span></code>, <code class="docutils literal notranslate"><span class="pre">ld.description</span></code>, <code class="docutils literal notranslate"><span class="pre">ld.comment</span></code> act as counterpart of “title”, “description”, and “comment” in JSON Schema, respectively.
+See <a class="reference external" href="https://json-schema.org/understanding-json-schema/reference/generic.html#id2">JSON Schema Annotations</a> for more details.
+These JSON-LD keywords are used to introduce or overwrite original annotations in JSON Schema or add annotations if needed.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;bike id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ld.title&quot;</span><span class="o">:</span> <span class="s2">&quot;bike_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ld.description&quot;</span><span class="o">:</span> <span class="s2">&quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ld.comment&quot;</span><span class="o">:</span> <span class="s2">&quot;The id must be unique among all identifiers used in the system.&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:bike_id rdf:type rdf:Property;
+    dcterms:description &quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;;
+    dcterms:title &quot;bike_id&quot;;
+    rdfs:comment &quot;he id must be unique among all identifiers used in the system.&quot;;
+    rdfs:range xsd:string;
+    rdfs:label &quot;bike_id&quot;.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:bike_id;
+        sh:name &quot;bike_id&quot;;
+        sh:description &quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+</section>
+<section id="ld-existing">
+<h2>ld.existing<a class="headerlink" href="#ld-existing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Following <a class="reference external" href="https://protege.stanford.edu/publications/ontology_development/ontology101.pdf">the best practise of ontology development</a>,
+before creating an ontology term, one should consider to reuse existing vocabularies for your domain to avoid “re-inventing the wheel”.
+In the above <code class="docutils literal notranslate"><span class="pre">ld.id</span></code> example, the property “id” is renamed to “identifier”. However, ‘id’ is defined in many other domain vocabularies.
+In fact, One can simply reuse an equivalent term e.g. <a class="reference external" href="http://purl.org/dc/terms/identifier">“identifier” from DublinCore</a> instead of creating one.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.id&quot;</span><span class="o">:</span> <span class="s2">&quot;http://purl.org/dc/terms/identifier&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ld.existing&quot;</span><span class="o">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+dcterms:identifier rdf:type rdf:Property.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path dcterms:identifier;
+        sh:description &quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a property tagged with <code class="docutils literal notranslate"><span class="pre">ld.existing</span></code> in a JSON Schema, all the annotations associated with the property in the JSON Schema will not be present in RDF to avoid modification on existing vocabularies.</p>
+</div>
+</section>
+<section id="id-domain-id-range">
+<h2>id.domain id.range<a class="headerlink" href="#id-domain-id-range" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>JSC-LD parses a JSON Schema along its hierarchical structure.
+It is possible to annotate a property with <code class="docutils literal notranslate"><span class="pre">ld.domain</span></code> and/or <code class="docutils literal notranslate"><span class="pre">ld.range</span></code> to state any resource that has this property
+or any value of this property is an instance of a class, respectively. When the classes is not declared in a prior step, they will be created during conversion.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;bikes&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bike_id&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;bike_location&quot;</span><span class="o">:</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;The geo location of the bike.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;ld.domain&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/Bike&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;ld.range&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/Location&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:bikes rdf:type rdf:Property;
+    rdfs:label &quot;bikes&quot;.
+ex:bike_id rdf:type rdf:Property;
+    rdfs:label &quot;bike_id&quot;;
+    rdfs:range xsd:integer.
+ex:bike_location rdf:type rdf:Property;
+    dcterms:description &quot;The geo location of the bike.&quot;;
+    rdfs:label &quot;bike_location&quot;;
+    rdfs:domain ex:Bike;
+    rdfs:range ex:Location.
+ex:Bike rdf:type rdfs:Class;
+    rdfs:label &quot;Bike&quot;.
+ex:Location rdf:type rdfs:Class;
+    rdfs:label &quot;Location&quot;.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:bikes;
+        sh:name &quot;bikes&quot;
+    ],
+    [
+        sh:path ex:bike_id;
+        sh:name &quot;bike_id&quot;;
+        sh:datatype xsd:integer
+    ].
+exampleshape:BikeShape rdf:type sh:NodeShape;
+    sh:targetClass ex:Bike;
+    sh:property [
+        sh:path ex:bike_location;
+        sh:name &quot;bike_location&quot;;
+        sh:description &quot;The geo location of the bike.&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a dummy example about the usage of <code class="docutils literal notranslate"><span class="pre">ld.domain</span></code> and <code class="docutils literal notranslate"><span class="pre">ld.range</span></code>.
+Introducing classes can be better handled by using the combination of <code class="docutils literal notranslate"><span class="pre">ld.association</span></code> and <code class="docutils literal notranslate"><span class="pre">ld.id</span></code>.</p>
+</div>
+</section>
+<section id="ld-ignore">
+<h2>ld.ignore<a class="headerlink" href="#ld-ignore" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.ignore</span></code> is used to exclude certain properties and their sub-properties from a JSON Schema and <strong>not</strong> express them in RDF.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.ignore&quot;</span><span class="o">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;A unique identifier representing a bike stored, managed and accessed in the database.&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>When a property tagged with <code class="docutils literal notranslate"><span class="pre">ld.ignore</span></code>, not only the tagged property but also its sub-properties are excluded in the vocabulary.</p>
+</div>
+</section>
+<section id="ld-included">
+<h2>ld.included<a class="headerlink" href="#ld-included" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.included</span></code> is used to exclude certain properties only at one level but continue parsing their sub-properties.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;bikes&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.included&quot;</span><span class="o">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bike_id&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;an unique identifier of the bike.&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;bike_location&quot;</span><span class="o">:</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;The geo location of the bike.&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:bike_id rdf:type rdf:Property;
+    dcterms:description &quot;an unique identifier of the bike.&quot;;
+    rdfs:label &quot;bike_id&quot;;
+    rdfs:range xsd:integer.
+ex:bike_location rdf:type rdf:Property;
+    dcterms:description &quot;The geo location of the bike.&quot;;
+    rdfs:label &quot;bike_location&quot;;
+    rdfs:range xsd:string.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:bike_id;
+        sh:description &quot;an unique identifier of the bike.&quot;;
+        sh:name &quot;bike_id&quot;;
+        sh:datatype xsd:integer
+    ],
+    [
+        sh:path ex:bike_location;
+        sh:description &quot;The geo location of the bike.&quot;;
+        sh:name &quot;bike_location&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+</section>
+<section id="ld-enum">
+<h2>ld.enum<a class="headerlink" href="#ld-enum" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.enum</span></code> is defined in JSC-LD build-in syntax but still under use case evaluation.</p>
+<p>The enum keyword can be applied to  is used to restrict a value of a property to a fixed set of values.
+JSC-LD processes properties with enum keyword with skos:Concept and skos:ConceptSchema.</p>
+</div></blockquote>
+</section>
+<section id="ld-association">
+<h2>ld.association<a class="headerlink" href="#ld-association" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ld.association</span></code> is used in combination with <code class="docutils literal notranslate"><span class="pre">ld.id</span></code> and especially designed for complex and nested JSON Schemas.
+Consider the bike example given before, without <code class="docutils literal notranslate"><span class="pre">ld.included</span></code> annotation, “bikes” and its sub-properties “bike_id” and “bike_location”
+will be considered as instances of rdf:Property without indicating connections in between by default.
+By adding <code class="docutils literal notranslate"><span class="pre">ld.association</span></code> and <code class="docutils literal notranslate"><span class="pre">ld.id</span></code>, JSC-LD will create an association class to connect them.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;bikes&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.association&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ld.id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://www.example.com/Bike&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ld.description&quot;</span><span class="o">:</span> <span class="s2">&quot;A bike instance&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bike_id&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;bike_location&quot;</span><span class="o">:</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:bikes rdf:type rdf:Property;
+    rdfs:range ex:Bike;
+    rdfs:label &quot;bikes&quot;.
+
+ex:Bike rdf:type rdf:Class;
+    dcterms:description &quot;A bike instance&quot;;
+    rdfs:label &quot;Bike&quot;.
+
+ex:bike_id rdf:type rdf:Property;
+    rdfs:domain ex:Bike;
+    rdfs:range xsd:integer;
+    rdfs:label &quot;bike_id&quot;.
+
+ex:bike_location rdf:type rdf:Property;
+    rdfs:domain ex:Bike;
+    rdfs:range xsd:string;
+    rdfs:label &quot;bike_location&quot;.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+    exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:bikes;
+        sh:name &quot;bikes&quot;
+    ].
+
+exampleshape:BikeShape rdf:type sh:NodeShape;
+    sh:targetClass ex:Bike;
+    sh:property [
+        sh:path ex:bike_id;
+        sh:name &quot;bike_id&quot;;
+        sh:datatype xsd:integer
+    ],
+    [
+        sh:path ex:bike_location;
+        sh:name &quot;bike_location&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+</section>
+<section id="ld-class">
+<h2>ld.class<a class="headerlink" href="#ld-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In addition to <code class="docutils literal notranslate"><span class="pre">ld.association</span></code>, <code class="docutils literal notranslate"><span class="pre">ld.class</span></code> is also used to create a class, but it behaves differently.
+Fundamentally, it combines the features of <code class="docutils literal notranslate"><span class="pre">ld.association</span></code> and <code class="docutils literal notranslate"><span class="pre">ld.included</span></code>.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;bikes&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.class&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ld.id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://www.example.com/Bike&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ld.description&quot;</span><span class="o">:</span> <span class="s2">&quot;A bike instance&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bike_id&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;bike_location&quot;</span><span class="o">:</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+ex:Bike rdf:type rdf:Class;
+    dcterms:description &quot;A bike instance&quot;;
+    rdfs:label &quot;Bike&quot;.
+
+ex:bike_id rdf:type rdf:Property;
+    rdfs:domain ex:Bike;
+    rdfs:range xsd:integer;
+    rdfs:label &quot;bike_id&quot;.
+
+ex:bike_location rdf:type rdf:Property;
+    rdfs:domain ex:Bike;
+    rdfs:range xsd:string;
+    rdfs:label &quot;bike_location&quot;.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:BikeShape rdf:type sh:NodeShape;
+    sh:targetClass ex:Bike;
+    sh:property [
+        sh:path ex:bike_id;
+        sh:name &quot;bike_id&quot;;
+        sh:datatype xsd:integer
+    ],
+    [
+        sh:path ex:bike_location;
+        sh:name &quot;bike_location&quot;;
+        sh:datatype xsd:string
+    ].
+</pre></div>
+</div>
+</section>
+<section id="ld-geojsonfeature">
+<h2>ld.geoJsonFeature<a class="headerlink" href="#ld-geojsonfeature" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Handling geometry type properties can be quite tricky. Below is a snapshot of station_area from the JSON Schema for General Bikeshare Feed Specification(GBFS) feeds.
+For the sake of simplicity, adding <code class="docutils literal notranslate"><span class="pre">ld.geoJsonFeature</span></code> will make “station_area” property have a value that is a instance of geosparql:Geometry by default.
+When the geosparql:Geometry is not suitable, one may change it to another Geometry class with <code class="docutils literal notranslate"><span class="pre">ld.range</span></code>.</p>
+</div></blockquote>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;station_area&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ld.geoJsonFeature&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;ld.range&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://www.opengis.net/ont/geosparql#Geometry&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;A multipolygon that describes the area of a virtual station.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;MultiPolygon&quot;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;coordinates&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;minItems&quot;</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
+                        <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;minItems&quot;</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+                            <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>RDF vocabulary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix gbfs: &lt;https://w3id.org/gbfs#&gt;.
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt;.
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+gbfs:stationArea dcterms:description &quot;A multipolygon that describes the area of a virtual station.&quot;;
+    rdf:type rdf:Property;
+    rdfs:label &quot;stationArea&quot;;
+    rdfs:range geosparql:Geometry.
+</pre></div>
+</div>
+<p>RDF Shacl shape</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@prefix ex: &lt;https://www.example.com/&gt;.
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt;.
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix exampleshape: &lt;https://www.example.com//example/shapes/example#&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+
+exampleshape:ExampleShape rdf:type sh:NodeShape;
+    sh:targetClass ex:ExampleClass;
+    sh:property [
+        sh:path ex:station_area;
+        sh:description &quot;A multipolygon that describes the area of a virtual station.&quot;;
+        sh:name &quot;station_area&quot;
+    ].
+</pre></div>
+</div>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, IDLab, Ghent University – imec.<br/>
+      Last updated on Oct 06, 2022.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
